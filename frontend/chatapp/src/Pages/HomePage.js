@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <Container maxW='xl' centerContent>
       <Box>
-        
+        <p>Hello</p>
       </Box>
     </Container>
   )
