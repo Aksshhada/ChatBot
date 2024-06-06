@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { VStack, FormControl, FormLabel, Input, Button, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
     const [name, setName] = useState('');
@@ -8,12 +11,73 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [show, setShow] = useState(false);
     const [cshow, setcShow] = useState(false);
+    const toast = useToast();
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const handleClick = () => setShow(!show);
 
     const handleClickon = () => setcShow(!cshow);
 
-    const submitHandler = () => { };
+    const submitHandler = async () => {
+        setLoading(true);
+        if (!name || !email || !password || !confirmPassword) {
+            toast({
+                title: 'Please fill all the fields.',
+                position: 'bottom',
+                status: 'warning',
+                duration: 5000,
+                isClosable: true,
+            });
+            setLoading(false);
+            return;
+        };
+
+
+        if (password !== confirmPassword) {
+            toast({
+                title: 'Passwords do not match!',
+                position: 'bottom',
+                status: 'warning',
+                duration: 5000,
+                isClosable: true,
+            });
+            return;
+        };
+
+        try {
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+
+        const { data } = await axios.post("/api/user", { name, email, password/*, pic*/ }, config);
+            toast({
+                title: 'Registration Successful',
+                position: 'bottom',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            });
+
+            localStorage.setItem("userInfo", JSON.stringify(data));
+
+            setLoading(false);
+            navigate.push('/chats');
+
+        } catch (error) {
+            toast({
+                title: 'Error Occured',
+                description: error.response.data.message,
+                position: 'bottom',
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            });
+            setLoading(false);
+        }
+    };
 
     return (
         <VStack spacing={4}>
@@ -78,7 +142,8 @@ const Signup = () => {
             </FormControl>
 
             <Button colorScheme="teal" size="md" width="full"
-                onClick={submitHandler}>
+                onClick={submitHandler}
+                isLoading = {loading}>
                 Signup
             </Button>
 
