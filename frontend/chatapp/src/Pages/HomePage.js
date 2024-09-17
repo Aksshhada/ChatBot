@@ -2,8 +2,26 @@ import React from 'react';
 import { ChakraProvider, Box, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import Login from '../components/Authentication/Login';
 import Signup from '../components/Authentication/Signup';
+import { useNavigate } from "react-router-dom"
+import { useEffect } from 'react';
+import { ChatState } from '../Context/ChatProvider';
+
 
 const HomePage = () => {
+
+  const navigate = useNavigate();
+
+  const { setUser } = ChatState();
+
+    useEffect(() => {
+      const user = JSON.parse(localStorage.getItem("userInfo"));
+      setUser(user);
+
+      if(user) navigate('/chats');
+      
+    }, [navigate, setUser]);
+
+    
   return (
     <ChakraProvider>
       <Box 

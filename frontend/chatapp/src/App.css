@@ -6,4 +6,26 @@
     background-image: url("./Images/bg_image.jpg");
     background-size: cover;
     background-position: center;
+    overflow: hidden;
+    transform: translateY(-10px); 
+    
+}
+
+body, html {
+    overflow: hidden;
+    height: 100%;
+} 
+
+
+
+::-webkit-scrollbar{
+    width: 0px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgba(red, green, blue, alpha);
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: rgb(255, 255, 255);
 }
