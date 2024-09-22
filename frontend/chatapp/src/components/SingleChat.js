@@ -8,11 +8,16 @@ import UpdateGroupChatModal from './miscellaneous/UpdateGroupChatModal';
 import axios from 'axios';
 import './styles.css'
 import ScrollableChat from './ScrollableChat';
+import io from 'socket.io-client'
+
+const ENDPOINT = "http://localhost:5000"
+var socket, selectedChatCompare
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([])
-  const [loading, setLoading] = useState([])
-  const [NewMessage, setNewMessage] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [NewMessage, setNewMessage] = useState()
+  const [socketConnected, setSocketConnected] = useState(false)
 
   const toast = useToast()
 
@@ -35,9 +40,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         config
       )
 
-      console.log(messages)
       setMessages(data)
       setLoading(false)
+
+      socket.emit("join chat", selectedChat._id)
+
     } catch (error) {
       toast({
         title: "Error occured",
@@ -50,9 +57,31 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   }
 
+  console.log(messages)
+
+
+  useEffect(() => {
+    socket = io(ENDPOINT)
+    socket.emit("setup", user)
+    socket.on("connection", () => setSocketConnected(true))
+  })
+
+
   useEffect(() => {
     fetchMessages()
+
+    selectedChatCompare = selectedChat
   }, [selectedChat])
+
+
+  useEffect(() => {
+    socket.on("message received", (newMessageReceived) => {
+      if (!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id){
+      } else {
+        setMessages([...messages, newMessageReceived])
+      }
+    })
+  })
 
 
   const sendMessage = async (event) => {
@@ -78,11 +107,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
         console.log(data)
 
+        socket.emit("new message", data)
+
         setMessages([...messages, data])
       } catch (error) {
         toast({
           title: "Error occured",
-          description: "Failed to send the message",
+          description: error.response?.data?.message || "Failed to send the message",
           status: "error",
           duration: 5000,
           isClosable: true,
@@ -92,10 +123,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   }
 
+
   const typingHandler = (e) => {
     setNewMessage(e.target.value)
 
-    // typing indicator logic
+    // typing indicator
   }
 
   return (
@@ -110,7 +142,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             fontFamily="Work sans"
             display="flex"
             justifyContent={{ base: 'space-between' }}
-            alignItems="center"
+            alignItems={"center"}
           >
             <IconButton
               display={{ base: 'flex', md: 'none' }}

@@ -1,7 +1,7 @@
 import { ViewIcon } from '@chakra-ui/icons'
 import { Box, Button, FormControl, IconButton, Input, Modal, ModalBody,
          ModalCloseButton, ModalContent, ModalFooter, ModalHeader,
-         ModalOverlay, position, Spinner, useDisclosure, 
+         ModalOverlay, Spinner, useDisclosure, 
          useToast} from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { ChatState } from '../../Context/ChatProvider';

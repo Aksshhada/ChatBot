@@ -1,6 +1,18 @@
-.messages {
+/* .messages {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
     scrollbar-width: none;
+} */
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Use 'auto' instead of 'scroll' */
+    scrollbar-width: none; /* This hides the scrollbar in Firefox */
+    -ms-overflow-style: none; /* This hides the scrollbar in Internet Explorer */
+}
+
+.messages::-webkit-scrollbar {
+    display: none; /* This hides the scrollbar in Chrome/Safari */
 }
