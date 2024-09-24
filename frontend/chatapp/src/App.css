@@ -3,11 +3,10 @@
 .App{
     min-height: 100vh;
     display: flex;
-    background-image: url("./Images/bg_image.jpg");
+    background-image: url("./Images/8775453.jpg");
     background-size: cover;
     background-position: center;
     overflow: hidden;
-    transform: translateY(-10px); 
     
 }
 

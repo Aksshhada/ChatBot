@@ -7,7 +7,7 @@ import { Box, Button, Tooltip, Text, Menu, MenuButton, MenuList,Avatar, MenuItem
          Input,
          useToast, 
          Spinner} from "@chakra-ui/react";
-import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
 import ProfileModal from "./ProfileModal";
@@ -122,14 +122,13 @@ const SideDrawer = () => {
           </Button>
         </Tooltip>
         <Text fontSize = "2xl" fontFamily = "Work sans">
-          CHAT
+          CHAT APP
         </Text>
         <div>
           <Menu>
             <MenuButton>
-              <BellIcon fontSize={"2xl"} m={"1"} />
+              {/* <BellIcon fontSize={"2xl"} m={"1"} /> */}
             </MenuButton>
-            {/* <MenuList></MenuList> */}
           </Menu>
           <Menu>
           <MenuButton as = {Button} rightIcon = {<ChevronDownIcon />}>

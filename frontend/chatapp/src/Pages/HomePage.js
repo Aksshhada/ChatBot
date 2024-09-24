@@ -25,14 +25,17 @@ const HomePage = () => {
   return (
     <ChakraProvider>
       <Box 
-        width="400px" 
+        width="400px"
         mx="auto" 
-        mt="100px" 
+        mt="50px" 
+        mb={"50px"}
         p="4" 
         borderWidth="1px" 
         borderRadius="lg" 
         boxShadow="lg"
         justifyContent="center"
+        overflow={"hidden"}
+        minHeight="500px"
       >
         <Tabs isFitted variant="enclosed">
           <TabList mb="1em">

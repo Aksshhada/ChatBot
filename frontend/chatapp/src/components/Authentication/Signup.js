@@ -141,7 +141,7 @@ const Signup = () => {
                 </InputGroup>
             </FormControl>
 
-            <Button colorScheme="teal" size="md" width="full"
+            <Button colorScheme="blue" size="md" width="full"
                 onClick={submitHandler}
                 isLoading = {loading}>
                 Signup
