@@ -117,22 +117,11 @@ const Login = () => {
                 <Checkbox isChecked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)}>Remember Me</Checkbox>
             </FormControl>
 
-            <Button colorScheme="blue" size="md" width="full"
+            <Button colorScheme="dark blue" size="md" width="full"
                 onClick={submitHandler}
                 isLoading={loading}>
                 Login
             </Button>
-
-            {/* <Button variant={"solid"}
-                colorScheme="red"
-                width={"100%"}
-                onClick={() => {
-                    setEmail("guest@example.com");
-                    setPassword("123456");
-                }}
-            >
-                Get Guest User Credentials
-            </Button> */}
         </VStack>
     );
 };
