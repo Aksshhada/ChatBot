@@ -14,7 +14,7 @@ const ScrollableChat = ({ messages }) => {
   display: 'flex',  
   flexDirection: 'row',  
   justifyContent: m.sender?._id === user._id ? 'flex-end' : 'flex-start',  
-  alignItems: 'center',  
+  // alignItems: 'center',  
   padding: '5px',  
 }} key={m._id}>
 

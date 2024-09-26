@@ -117,7 +117,7 @@ const Login = () => {
                 <Checkbox isChecked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)}>Remember Me</Checkbox>
             </FormControl>
 
-            <Button colorScheme="dark blue" size="md" width="full"
+            <Button colorScheme="blue" size="md" width="full"
                 onClick={submitHandler}
                 isLoading={loading}>
                 Login
